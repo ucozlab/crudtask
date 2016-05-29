@@ -149,43 +149,15 @@
                     <!--/.col-xs-12.col-sm-9-->
 
                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                        <div class="panel panel-success">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Категории</h3>
-                            </div>
-                            <div class="panel-body">
-                                <ul>
-                                <?php
-                                    mysql_query("SET NAMES UTF8");
-                                    mysql_query("SET CHARACTER SET UTF8");
-                                    $result = mysql_query("SELECT * FROM  `category` LIMIT 0 , 30") or die("Invalid query: " . mysql_error());
-                                    while ($row = mysql_fetch_array($result)) {
-                                       //echo $row["Name"].", Room ".$row["Room"].", Tel ".$row["Telephone"] ;
-                                        echo "<li><a href='shop.php?category=".$row['id']."'>".$row["name"]."</a></li>";
-                                    }
-                                ?>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="panel panel-info">
-                            <div class="panel-heading">
-                                <h3 class="panel-title">Товары</h3>
-                            </div>
-                            <div class="panel-body">
-                               <ul>
-                                   <?php
-                                    require("bd.php");
-                                    mysql_query("SET NAMES UTF8");
-                                    mysql_query("SET CHARACTER SET UTF8");
-                                    $result = mysql_query("SELECT * FROM  `goods` LIMIT 0 , 30") or die("Invalid query: " . mysql_error());
-                                    while ($row = mysql_fetch_array($result)) {
-                                       //echo $row["Name"].", Room ".$row["Room"].", Tel ".$row["Telephone"] ;
-                                        echo "<li><a href='shop.php?good=".$row['id']."'>".$row["name"]."</a></li>";
-                                    }
-                                ?>
-                               </ul>
-                            </div>
-                        </div>
+                        <?php include('sidebar.php') ?>
+                        <?php
+                            $pagename = $_SERVER[REQUEST_URI];
+                            if (strpos($pagename, 'good') !== false) {
+                                $pieces = explode("/shop.php?good=", $pagename);
+                                echo ' <p><a class="btn btn-warning" href="edit.php?good='.$pieces[1].'">Редактировать данный товар</a></p>';
+                            }
+                        ?>
+                        <a href="add.php" class="btn btn-info">Добавить новый товар</a>
                     </div>
                     <!--/.sidebar-offcanvas-->
                     <?php mysql_close(); ?>
