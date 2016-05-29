@@ -47,11 +47,7 @@
                             <div class="row">
                                 <?php
                                 header('Content-Type: text/html; charset=utf-8');
-require("bd.php");
-if (isset($_POST['Name'])){$name = $_POST['Name'];}
-if (isset($_POST['Img'])){$img = $_POST['Img'];}
-if (isset($_POST['Date'])){$date = $_POST['Date'];}
-if (isset($_POST['Description'])){$description = $_POST['Description'];}
+                                require("bd.php");
                                 if (isset($_POST['name']) && isset($_POST['img']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
                                         $name = $_POST['name'];
                                         $img = $_POST['img'];

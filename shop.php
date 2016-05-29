@@ -150,14 +150,20 @@
 
                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                         <?php include('sidebar.php') ?>
+                        <p><a href="add.php" class="btn btn-info">Добавить новый товар</a></p>
                         <?php
                             $pagename = $_SERVER[REQUEST_URI];
                             if (strpos($pagename, 'good') !== false) {
                                 $pieces = explode("/shop.php?good=", $pagename);
                                 echo ' <p><a class="btn btn-warning" href="edit.php?good='.$pieces[1].'">Редактировать данный товар</a></p>';
-                            }
+
                         ?>
-                        <a href="add.php" class="btn btn-info">Добавить новый товар</a>
+                        <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form2" accept-charset="UTF-8">
+                            <input type="hidden" name="remove" placeholder="Цена" value="<?php echo $result['id']?>">
+                            <button type="submit" class="btn btn-danger">Удалить данный товар</button>
+                        </form></p>
+                        <?php } ?>
+
                     </div>
                     <!--/.sidebar-offcanvas-->
                     <?php mysql_close(); ?>
