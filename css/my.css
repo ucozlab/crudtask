@@ -1,0 +1,3 @@
+.goods_img{height: 160px;}
+.goods_img img{max-height: 160px;}
+.goods_desc{height:80px;overflow: hidden;margin:5px 0;}
