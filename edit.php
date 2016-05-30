@@ -6,18 +6,19 @@
         die("Redirecting to index.php");
     }
 ?>
-        <!doctype html>
-        <html lang="ru">
+    <!doctype html>
+    <html lang="ru">
 
-        <head>
-            <title>Редактировать товар</title>
-            <meta charset="utf-8">
-            <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <meta name="description" content="my work">
-            <?php require("links.php"); ?>
-        </head>
+    <head>
+        <title>Редактировать товар</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="my work">
+        <?php require("links.php"); ?>
+    </head>
 
-        <body>
+    <body>
+        <div id="wrap">
             <nav class="navbar navbar-inverse">
                 <div class="container">
                     <div class="navbar-header">
@@ -43,9 +44,9 @@
             <div class="container">
                 <div class="row row-offcanvas row-offcanvas-right">
 
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="row">
-                                <?php
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="row">
+                            <?php
                                 header('Content-Type: text/html; charset=utf-8');
                                 require("bd.php");
                                 $pagename = $_SERVER[REQUEST_URI];
@@ -112,64 +113,73 @@
                                     $q = mysql_query("SELECT * FROM  `goods` WHERE  `id` = ".$pieces[1]." ");
                                     $result = mysql_fetch_array($q);
                                 ?>
-                                <?php
+                                    <?php
                                 if (isset($_POST['remove'])) {
                                     echo ('<a href="/shop.php" class="btn btn-primary">Вернуться назад</a>');
                                 } else {
                                 ?>
-                                <div class="bs-example" data-example-id="basic-forms">
-                                    <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form1" accept-charset="UTF-8">
-                                        <fieldset disabled="disabled">
-                                            <div class="form-group"> <label for="id">id товара</label> <input type="text" name="id" class="form-control" placeholder="<?php echo $result['id']?>" value="<?php echo $result['id']?>"> </div>
-                                        </fieldset>
-                                        <div class="form-group">
-                                            <label for="category">Категория</label>
-                                            <select class="form-control" name="category">
-                                                <option value="1">Телевизоры</option>
-                                                <option value="2">Телефоны</option>
-                                                <option value="3">Планшеты</option>
-                                            </select>
-                                            <script>
-                                                $('select.form-control option[value="<?php echo $result['cat_id']?>"]').attr('selected',true);
-                                                $('select.form-control').change();
-                                            </script>
+                                        <div class="bs-example" data-example-id="basic-forms">
+                                            <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form1" accept-charset="UTF-8">
+                                                <fieldset disabled="disabled">
+                                                    <div class="form-group">
+                                                        <label for="id">id товара</label>
+                                                        <input type="text" name="id" class="form-control" placeholder="<?php echo $result['id']?>" value="<?php echo $result['id']?>"> </div>
+                                                </fieldset>
+                                                <div class="form-group">
+                                                    <label for="category">Категория</label>
+                                                    <select class="form-control" name="category">
+                                                        <option value="1">Телевизоры</option>
+                                                        <option value="2">Телефоны</option>
+                                                        <option value="3">Планшеты</option>
+                                                    </select>
+                                                    <script>
+                                                        $('select.form-control option[value="<?php echo $result['
+                                                            cat_id ']?>"]').attr('selected', true);
+                                                        $('select.form-control').change();
+                                                    </script>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name">Имя</label>
+                                                    <input type="text" class="form-control" name="name" placeholder="Имя" value="<?php echo $result['name']?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price">Изображение(url)</label>
+                                                    <input type="text" class="form-control" name="img" placeholder="Изображение" value="<?php echo $result['img']?>">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="description">Описание</label>
+                                                    <textarea class="form-control" rows="3" name="description" placeholder="Описание">
+                                                        <?php echo $result['description']?>
+                                                    </textarea>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="price">Цена</label>
+                                                    <input type="text" class="form-control" name="price" placeholder="Цена" value="<?php echo $result['price']?>">
+                                                </div>
+                                                <button type="submit" class="btn btn-success">Редактировать</button>
+                                            </form>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="name">Имя</label>
-                                            <input type="text" class="form-control" name="name" placeholder="Имя" value="<?php echo $result['name']?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="price">Изображение(url)</label>
-                                            <input type="text" class="form-control" name="img" placeholder="Изображение" value="<?php echo $result['img']?>">
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="description">Описание</label>
-                                            <textarea class="form-control" rows="3" name="description" placeholder="Описание"><?php echo $result['description']?></textarea>
-                                        </div>
-                                        <div class="form-group">
-                                            <label for="price">Цена</label>
-                                            <input type="text" class="form-control" name="price" placeholder="Цена" value="<?php echo $result['price']?>">
-                                        </div>
-                                        <button type="submit" class="btn btn-success">Редактировать</button>
-                                    </form>
-                                </div>
-                                <?php } ?>
-                            </div>
-                            <!--/row-->
+                                        <?php } ?>
                         </div>
-                        <!--/.col-xs-12.col-sm-9-->
+                        <!--/row-->
+                    </div>
+                    <!--/.col-xs-12.col-sm-9-->
 
-                        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                            <?php include('sidebar.php') ?>
+                    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                        <?php include('sidebar.php') ?>
                             <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form2" accept-charset="UTF-8">
                                 <input type="hidden" name="remove" placeholder="Цена" value="<?php echo $result['id']?>">
                                 <button type="submit" class="btn btn-danger">Удалить</button>
                             </form>
-                        </div>
-                        <!--/.sidebar-offcanvas-->
-                        <?php mysql_close(); ?>
+                    </div>
+                    <!--/.sidebar-offcanvas-->
+                    <?php mysql_close(); ?>
                 </div>
             </div>
-        </body>
+            <div id="push"></div>
+        </div>
+        <?php require("footer.php"); ?>
 
-        </html>
+    </body>
+
+    </html>

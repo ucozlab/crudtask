@@ -57,48 +57,56 @@
 		<?php require("links.php"); ?>
     </head>
     <body>
-        <nav class="navbar navbar-inverse" style="margin-bottom: 0;">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Меню</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">CRUD WORK</a>
+        <div id="wrap">
+            <nav class="navbar navbar-inverse" style="margin-bottom: 0;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Меню</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">CRUD WORK</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="active"><a href="#">Главная</a></li>
+                            <li><a href="shop.php">Магазин</a></li>
+                            <li><a href="register.php">Регистрация</a></li>
+                            <!-- <li><a href="#contact">Contact</a></li>-->
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Войти <span class="caret"></span></a>
+                                <div class="dropdown-menu" style="padding: 15px;width: 220px;">
+                                    <form action="index.php" method="post">
+                                        <div class="form-group">
+                                            <label for="username">Логин:</label>
+                                            <input type="text" class="form-control" name="username" value="<?php echo $submitted_username; ?>" /> </div>
+                                        <div class="form-group">
+                                            <label for="password">Пароль:</label>
+                                            <input type="password" class="form-control" name="password" value="" /> </div>
+                                        <input type="submit" class="btn btn-info" value="Войти" />
+                                    </form>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#">Главная</a></li>
-						<li><a href="shop.php">Магазин</a></li>
-                        <li><a href="register.php">Регистрация</a></li>
-                        <!-- <li><a href="#contact">Contact</a></li>-->
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Войти <span class="caret"></span></a>
-                            <div class="dropdown-menu" style="padding: 15px;width: 220px;">
-                                <form action="index.php" method="post">
-                                    <div class="form-group">
-                                        <label for="username">Логин:</label>
-                                        <input type="text" class="form-control" name="username" value="<?php echo $submitted_username; ?>" /> </div>
-                                    <div class="form-group">
-                                        <label for="password">Пароль:</label>
-                                        <input type="password" class="form-control" name="password" value="" /> </div>
-                                    <input type="submit" class="btn btn-info" value="Войти" />
-                                </form>
-                            </div>
-                        </li>
-                    </ul>
+            </nav>
+            <div class="jumbotron">
+                <div class="container">
+                    <h1>Добрый день!</h1>
+                    <br/>
+                    <p>Для того чтобы зайти в магазин необходимо <a href="register.php">Зарегистрироваться</a>, либо можно использовать дефолнтый логин и пароль:<br/>
+                    <pre>login: admin<br/>password: password</pre>
+                    </p>
+                    <br/>
+                    <p><a class="btn btn-primary btn-lg" href="register.php" role="button">Регистрация</a></p>
                 </div>
-                <!--/.nav-collapse -->
             </div>
-        </nav>
-        <div class="jumbotron">
-            <div class="container">
-                <h1>Добрый день!</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                <p><a class="btn btn-primary btn-lg" href="register.php" role="button">Регистрация</a></p>
-            </div>
+            <div id="push"></div>
         </div>
+        <?php require("footer.php"); ?>
     </body>
 </html>

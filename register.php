@@ -90,52 +90,58 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-inverse" style="margin-bottom: 0;">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Меню</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/">CRUD WORK</a>
+        <div id="wrap">
+            <nav class="navbar navbar-inverse" style="margin-bottom: 0;">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Меню</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">CRUD WORK</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="index.php">Главная</a></li>
+                            <li class="active"><a href="register.php">Регистрация</a></li>
+                            <!-- <li><a href="#contact">Contact</a></li>-->
+                        </ul>
+                    </div>
+                    <!--/.nav-collapse -->
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.php">Главная</a></li>
-                        <li class="active"><a href="register.php">Регистрация</a></li>
-                        <!-- <li><a href="#contact">Contact</a></li>-->
-                    </ul>
+            </nav>
+            <div id="main">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-4 col-xs-12">
+                            <h1>Регистрация</h1>
+                            <br />
+                            <form action="register.php" method="post">
+                                <div class="form-group">
+                                    <label for="username">Логин:</label>
+                                    <input class="form-control" type="text" name="username" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Е-мейл:</label>
+                                    <input class="form-control" type="text" name="email" value="" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Пароль:</label>
+                                    <input class="form-control" type="password" name="password" value="" />
+                                </div>
+                                <br/>
+                                <input type="submit" class="btn btn-primary btn-lg" value="Регистрация">
+                            </form>
+                        </div>
+                    </div>
                 </div>
-                <!--/.nav-collapse -->
             </div>
-        </nav>
-        <div id="main">
-            <div class="container">
-				<div class="row">
-                <div class="col-md-4 col-xs-12">
-					<h1>Регистрация</h1>
-						<br />
-						<form action="register.php" method="post">
-							<div class="form-group">
-								<label for="username">Логин:</label>
-								<input class="form-control" type="text" name="username" value="" />
-							</div>
-							<div class="form-group">
-								<label for="email">Е-мейл:</label>
-								<input class="form-control" type="text" name="email" value="" />
-							</div>
-							<div class="form-group">
-								<label for="password">Пароль:</label>
-								<input class="form-control" type="password" name="password" value="" />
-							</div>
-							<br/><input type="submit" class="btn btn-primary btn-lg" value="Регистрация">
-						</form>
-					</div>
-                </div>
-            </div>
+            <div id="push"></div>
         </div>
+        <?php require("footer.php"); ?>
+
     </body>
 
     </html>

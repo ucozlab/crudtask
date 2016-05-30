@@ -6,18 +6,19 @@
         die("Redirecting to index.php");
     }
 ?>
-        <!doctype html>
-        <html lang="ru">
+    <!doctype html>
+    <html lang="ru">
 
-        <head>
-            <title>Добавить новый товар</title>
-            <meta charset="utf-8">
-            <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-            <meta name="description" content="my work">
-            <?php require("links.php"); ?>
-        </head>
+    <head>
+        <title>Добавить новый товар</title>
+        <meta charset="utf-8">
+        <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+        <meta name="description" content="my work">
+        <?php require("links.php"); ?>
+    </head>
 
-        <body>
+    <body>
+        <div id="wrap">
             <nav class="navbar navbar-inverse">
                 <div class="container">
                     <div class="navbar-header">
@@ -43,9 +44,9 @@
             <div class="container">
                 <div class="row row-offcanvas row-offcanvas-right">
 
-                        <div class="col-xs-12 col-sm-9">
-                            <div class="row">
-                                <?php
+                    <div class="col-xs-12 col-sm-9">
+                        <div class="row">
+                            <?php
                                 header('Content-Type: text/html; charset=utf-8');
                                 require("bd.php");
                                 if (isset($_POST['name']) && isset($_POST['img']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
@@ -105,18 +106,22 @@
                                         <button type="submit" class="btn btn-default">Добавить</button>
                                     </form>
                                 </div>
-                            </div>
-                            <!--/row-->
                         </div>
-                        <!--/.col-xs-12.col-sm-9-->
+                        <!--/row-->
+                    </div>
+                    <!--/.col-xs-12.col-sm-9-->
 
-                        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
-                            <?php include('sidebar.php') ?>
-                        </div>
-                        <!--/.sidebar-offcanvas-->
-                        <?php mysql_close(); ?>
+                    <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+                        <?php include('sidebar.php') ?>
+                    </div>
+                    <!--/.sidebar-offcanvas-->
+                    <?php mysql_close(); ?>
                 </div>
             </div>
-        </body>
+            <div id="push"></div>
+        </div>
+        <?php require("footer.php"); ?>
 
-        </html>
+    </body>
+
+    </html>
