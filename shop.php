@@ -117,20 +117,20 @@
                                 <div class="row">
                                     <?php
                                 // get page
+
                                 $pagename = $_SERVER[REQUEST_URI];
-                                mysql_query("SET NAMES UTF8");
-                                mysql_query("SET CHARACTER SET UTF8");
                                 if (strpos($pagename, 'category') !== false) {
-                                    $pieces = explode("/shop.php?category=", $pagename);
-                                    $q = mysql_query("SELECT * FROM  `goods` WHERE  `cat_id` = ".$pieces[1]." ");
+                                    $category = $_GET['category'];
+                                    $query = "SELECT * FROM  `goods` WHERE  `cat_id` = ".$category." ";
                                 } else if(strpos($pagename, 'good') !== false){
-                                    $pieces = explode("/shop.php?good=", $pagename);
-                                    $q = mysql_query("SELECT * FROM  `goods` WHERE  `id` = ".$pieces[1]." ");
+                                    $good = $_GET['good'];
+                                    $query = "SELECT * FROM  `goods` WHERE  `id` = ".$good." ";
                                 } else {
-                                    $q = mysql_query("SELECT * FROM  `goods`");
+                                    $query ="SELECT * FROM  `goods`";
                                 }
                                 // loop the get the results
-                                while($result = mysql_fetch_array($q)) {
+                                $stmt = $db->query($query);
+                                while ($result = $stmt->fetch()) {
                                     // $result["img"];
                                     echo '
                                       <div class="col-xs-6 col-lg-4">
@@ -154,13 +154,14 @@
                                 <?php include('sidebar.php') ?>
                                     <p><a href="add.php" class="btn btn-info">Добавить новый товар</a></p>
                                     <?php
+
                             $pagename = $_SERVER[REQUEST_URI];
                             if (strpos($pagename, 'good') !== false) {
-                                $pieces = explode("/shop.php?good=", $pagename);
-                                echo ' <p><a class="btn btn-warning" href="edit.php?good='.$pieces[1].'">Редактировать данный товар</a></p>';
+                                $good = $_GET['good'];
+                                echo ' <p><a class="btn btn-warning" href="edit.php?good='.$good.'">Редактировать данный товар</a></p>';
 
                         ?>
-                                        <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form2" accept-charset="UTF-8">
+                                        <form action="/edit.php?good=<?php echo $good?>" method="post" name="form2" accept-charset="UTF-8">
                                             <input type="hidden" name="remove" placeholder="Цена" value="<?php echo $result['id']?>">
                                             <button type="submit" class="btn btn-danger">Удалить данный товар</button>
                                         </form>
@@ -169,7 +170,7 @@
 
                             </div>
                             <!--/.sidebar-offcanvas-->
-                            <?php mysql_close(); ?>
+                            <?php $db = NULL; ?>
                     </div>
                 </div>
                 <div id="push"></div>

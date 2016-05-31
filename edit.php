@@ -47,12 +47,10 @@
                     <div class="col-xs-12 col-sm-9">
                         <div class="row">
                             <?php
-                                header('Content-Type: text/html; charset=utf-8');
-                                require("bd.php");
-                                $pagename = $_SERVER[REQUEST_URI];
                                 mysql_query("SET NAMES UTF8");
                                 mysql_query("SET CHARACTER SET UTF8");
-                                $pieces = explode("/edit.php?good=", $pagename);
+                                $good = $_GET['good'];
+
                                 if (isset($_POST['name']) && isset($_POST['img']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
 
                                         $name = $_POST['name'];
@@ -61,8 +59,8 @@
                                         $cat = $_POST['category'];
                                         $price = $_POST['price'];
                                         $id = $_POST['id'];
-                                        $rez = mysql_query("UPDATE  `xc219455_db`.`goods` SET  `name` =  '$name', `img` =  '$img', `description` =  '$desc', `price` =  '$price', `cat_id` =  '$cat' WHERE  `goods`.`id` = '$pieces[1]' ");
-                                        if ($rez == 'true') {echo '
+                                        $query = "UPDATE  `xc219455_db`.`goods` SET  `name` =  '$name', `img` =  '$img', `description` =  '$desc', `price` =  '$price', `cat_id` =  '$cat' WHERE  `goods`.`id` = '$good' ";
+                                        if ($db->exec($query)) {echo '
                                         <div class="alert alert-success" role="alert">
                                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -82,9 +80,9 @@
                                         }
                                     }
                                 if (isset($_POST['remove'])) {
-                                    $rez = mysql_query("DELETE FROM `xc219455_db`.`goods` WHERE `goods`.`id` = '$pieces[1]' ");
+                                    $query = "DELETE FROM `xc219455_db`.`goods` WHERE `goods`.`id` = '$good' ";
 
-                                    if ($rez == 'true') {
+                                    if ($db->exec($query)) {
                                         echo '
                                         <div class="alert alert-danger" role="alert">
                                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -106,20 +104,20 @@
                                 }
                                 ?>
                                 <?php
-                                    $pagename = $_SERVER[REQUEST_URI];
-                                    mysql_query("SET NAMES UTF8");
-                                    mysql_query("SET CHARACTER SET UTF8");
-                                    $pieces = explode("/edit.php?good=", $pagename);
-                                    $q = mysql_query("SELECT * FROM  `goods` WHERE  `id` = ".$pieces[1]." ");
-                                    $result = mysql_fetch_array($q);
+                                    try{
+                                        $rez = $db->query("SELECT * FROM  `goods` WHERE  `id` = ".$good." ");
+                                       // $result = $stmt->execute($query_params);
+                                    }
+                                    catch(PDOException $ex){ die("Failed to run query: " . $ex->getMessage()); }
                                 ?>
                                     <?php
-                                if (isset($_POST['remove'])) {
-                                    echo ('<a href="/shop.php" class="btn btn-primary">Вернуться назад</a>');
-                                } else {
-                                ?>
+                                        if (isset($_POST['remove'])) {
+                                            echo ('<a href="/shop.php" class="btn btn-primary">Вернуться назад</a>');
+                                        } else {
+                                            $result = $rez->fetch();
+                                        ?>
                                         <div class="bs-example" data-example-id="basic-forms">
-                                            <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form1" accept-charset="UTF-8">
+                                            <form action="/edit.php?good=<?php echo $good?>" method="post" name="form1" accept-charset="UTF-8">
                                                 <fieldset disabled="disabled">
                                                     <div class="form-group">
                                                         <label for="id">id товара</label>
@@ -133,8 +131,7 @@
                                                         <option value="3">Планшеты</option>
                                                     </select>
                                                     <script>
-                                                        $('select.form-control option[value="<?php echo $result['
-                                                            cat_id ']?>"]').attr('selected', true);
+                                                        $('select.form-control option[value="<?php echo $result['cat_id']?>"]').attr('selected', true);
                                                         $('select.form-control').change();
                                                     </script>
                                                 </div>
@@ -159,7 +156,10 @@
                                                 <button type="submit" class="btn btn-success">Редактировать</button>
                                             </form>
                                         </div>
-                                        <?php } ?>
+                                        <?php
+                                            }
+
+                            ?>
                         </div>
                         <!--/row-->
                     </div>
@@ -167,13 +167,13 @@
 
                     <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
                         <?php include('sidebar.php') ?>
-                            <form action="/edit.php?good=<?php echo $pieces[1]?>" method="post" name="form2" accept-charset="UTF-8">
-                                <input type="hidden" name="remove" placeholder="Цена" value="<?php echo $result['id']?>">
+                            <form action="/edit.php?good=<?php echo $good?>" method="post" name="form2" accept-charset="UTF-8">
+                                <input type="hidden" name="remove" placeholder="Цена" value="<?php echo $good?>">
                                 <button type="submit" class="btn btn-danger">Удалить</button>
                             </form>
                     </div>
                     <!--/.sidebar-offcanvas-->
-                    <?php mysql_close(); ?>
+                    <?php $db = NULL; ?>
                 </div>
             </div>
             <div id="push"></div>
@@ -182,4 +182,4 @@
 
     </body>
 
-    </html>
+</html>

@@ -47,17 +47,14 @@
                     <div class="col-xs-12 col-sm-9">
                         <div class="row">
                             <?php
-                                header('Content-Type: text/html; charset=utf-8');
-                                require("bd.php");
                                 if (isset($_POST['name']) && isset($_POST['img']) && isset($_POST['description']) && isset($_POST['category']) && isset($_POST['price'])) {
                                         $name = $_POST['name'];
                                         $img = $_POST['img'];
                                         $desc = $_POST['description'];
                                         $cat = $_POST['category'];
                                         $price = $_POST['price'];
-                                        $rez = mysql_query("INSERT INTO goods (name,img,description,price,cat_id) VALUES ('$name','$img','$desc','$price','$cat')");
-
-                                        if ($rez == 'true') {echo '
+                                        $query = "INSERT INTO goods (name,img,description,price,cat_id) VALUES ('$name','$img','$desc','$price','$cat')";
+                                        if ($db->exec($query)) {echo '
                                         <div class="alert alert-success" role="alert">
                                                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                                                     <span aria-hidden="true">&times;</span>
@@ -115,7 +112,7 @@
                         <?php include('sidebar.php') ?>
                     </div>
                     <!--/.sidebar-offcanvas-->
-                    <?php mysql_close(); ?>
+                    <?php $db = NULL; ?>
                 </div>
             </div>
             <div id="push"></div>
