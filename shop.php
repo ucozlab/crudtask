@@ -93,7 +93,6 @@
                 </nav>
                 <div class="container">
                     <div class="row row-offcanvas row-offcanvas-right">
-                        <?php require("bd.php"); ?>
                             <div class="col-xs-12 col-sm-9">
                                 <p class="pull-right visible-xs">
                                     <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
